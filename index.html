@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Momentive Daily Trends",
+  "schemaVersion": 1,
+  "description": "Daily trends dashboard for Momentive Software covering all 10 solution groups. Auto-refreshed each morning with rising queries, content angles, competitor signals, and industry news hooks."
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momentive Daily Trends — May 15, 2026</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/theme/mermaid.min.css" integrity="sha384-jZvDSsmGB9oGGT/4l9bHXGoAv1OxvG/cFmSo0dZaSqmBgvQTKDBFAMftlXTmMbNW" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/gridjs@5.0.2/dist/gridjs.umd.js" integrity="sha384-/XXDzxe4FsGiAe50i/u9pY/Vy/uX654MHB1xoc1BJNnH1WXHhqHga9g3q5tF4gj7" crossorigin="anonymous"></script>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f7f8fa; color: #1a1a2e; font-size: 14px; line-height: 1.5; }
+
+  .header { background: #1a1a2e; color: #fff; padding: 20px 28px 16px; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  .header .date { font-size: 12px; opacity: 0.65; }
+  .header .logo { font-size: 11px; opacity: 0.5; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+  .top3 { background: #fff; border-left: 4px solid #4f46e5; margin: 20px 24px 0; border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .top3 h2 { font-size: 12px; font-weight: 700; color: #4f46e5; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+  .top3 ol { padding-left: 18px; }
+  .top3 ol li { margin-bottom: 8px; font-size: 13px; line-height: 1.5; }
+  .top3 ol li strong { color: #1a1a2e; }
+
+  .tabs-wrap { margin: 20px 24px 0; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 0; }
+  .tab-btn { padding: 7px 12px; border: none; border-radius: 6px 6px 0 0; cursor: pointer; font-size: 12px; font-weight: 500; background: #e4e6ed; color: #555; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+  .tab-btn:hover { background: #d0d3df; }
+  .tab-btn.active { background: #4f46e5; color: #fff; }
+
+  .tab-panel { display: none; background: #fff; border-radius: 0 8px 8px 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .tab-panel.active { display: block; }
+
+  .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .section-grid { grid-template-columns: 1fr; } }
+
+  .section-card { background: #f7f8fa; border-radius: 8px; padding: 14px 16px; }
+  .section-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .section-card h3 .icon { font-size: 14px; }
+  .section-card.rising h3 { color: #0ea5e9; }
+  .section-card.angles h3 { color: #8b5cf6; }
+  .section-card.competitors h3 { color: #f59e0b; }
+  .section-card.news h3 { color: #10b981; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 3px 10px; font-size: 12px; color: #374151; }
+  .tag.rising { border-color: #bae6fd; color: #0369a1; background: #f0f9ff; }
+
+  .item { margin-bottom: 10px; }
+  .item:last-child { margin-bottom: 0; }
+  .item .label { font-weight: 600; font-size: 12px; color: #374151; margin-bottom: 2px; }
+  .item .desc { font-size: 12px; color: #6b7280; line-height: 1.5; }
+  .item .angle-title { font-weight: 600; font-size: 12px; color: #7c3aed; margin-bottom: 2px; }
+
+  .footer { text-align: center; font-size: 11px; color: #9ca3af; padding: 16px 24px 24px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <h1>Momentive Daily Trends</h1>
+    <span class="logo">Momentive Software</span>
+  </div>
+  <div class="date">Friday, May 15, 2026 — All 10 solution groups</div>
+</div>
+
+<div class="top3">
+  <h2>Top 3 things to know today</h2>
+  <ol>
+    <li><strong>The AI efficiency plateau is your opening.</strong> 92% of nonprofits use AI. Only 7% see major impact. 81% operate without shared workflows. MomentiveIQ's unified cross-platform approach addresses exactly what most clients are missing.</li>
+    <li><strong>2026 is the Year of Digital Credentials.</strong> Micro-credentials hit mainstream with a 17% CAGR, Open Badge 3.0 adoption rising, and 96% of employers saying micro-credentials strengthen job applications. Associations with certification programs face real pressure to modernize.</li>
+    <li><strong>Fundraising sector consolidation accelerating.</strong> Bloomerang acquired Qgiv. Classy rebranded as GoFundMe Pro with Salesforce CRM integration. The competitive map for GiveSmart and OneCause is shifting now.</li>
+  </ol>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" data-tab="momentiveiq">MomentiveIQ</button>
+    <button class="tab-btn" data-tab="ams">AMS</button>
+    <button class="tab-btn" data-tab="fundraising">Fundraising</button>
+    <button class="tab-btn" data-tab="events">Events</button>
+    <button class="tab-btn" data-tab="lms">LMS</button>
+    <button class="tab-btn" data-tab="accounting">Accounting</button>
+    <button class="tab-btn" data-tab="certification">Certification</button>
+    <button class="tab-btn" data-tab="career">Career Center</button>
+    <button class="tab-btn" data-tab="volunteer">Volunteer</button>
+    <button class="tab-btn" data-tab="donor">Donor Mgmt</button>
+  </div>
+
+  <!-- MomentiveIQ -->
+  <div class="tab-panel active" id="tab-momentiveiq">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">AI adoption gap nonprofit</span>
+          <span class="tag rising">nonprofit AI governance policy</span>
+          <span class="tag rising">AI for associations predictive analytics</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog / LinkedIn</div>
+          <div class="desc">"92% of nonprofits use AI. Only 7% see results. Here is what separates them." Open with the Virtuous/Fundraising.AI data, then show how documented workflows and cross-platform data access close the gap.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">Email / Nurture</div>
+          <div class="desc">"Your AI tools are probably working against each other." Speak to teams with 4 to 6 disconnected tools. Show how MomentiveIQ aggregates signals across GiveSmart, MIP, and YourMembership.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Virtuous</div>
+          <div class="desc">Co-authored the 2026 Nonprofit AI Adoption Report. Significant earned media. Actively positioning as the AI-native CRM for nonprofits.</div>
+        </div>
+        <div class="item">
+          <div class="label">Bloomerang</div>
+          <div class="desc">Acquired Qgiv. Broader payment and fundraising stack may push mid-market clients to consolidate on Bloomerang.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">Virtuous + Fundraising.AI released 2026 Nonprofit AI Adoption Report via PR Newswire in February 2026. Driving active media coverage across nonprofit publications.</div>
+        </div>
+        <div class="item">
+          <div class="desc">Social Current (Jan 2026): nonprofits under $1M revenue adopt AI at roughly half the rate of larger organizations. The AI divide is a growing story.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMS -->
+  <div class="tab-panel" id="tab-ams">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">AI-powered AMS member churn prediction</span>
+          <span class="tag rising">all-in-one association management platform</span>
+          <span class="tag rising">AMS mobile app member engagement</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"Why your AMS should predict churn before you see it." Walk through what member engagement signals look like and how AI-enabled AMS surfaces them automatically.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">LinkedIn</div>
+          <div class="desc">The shift from "tracking software" to "acting software." Association leaders no longer want a system of record. They want a system of action.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Vantaca</div>
+          <div class="desc">Making aggressive #1 ranking claims in community association management. Messaging style worth watching.</div>
+        </div>
+        <div class="item">
+          <div class="label">Personify (now Momentive)</div>
+          <div class="desc">Acquired January 2026. Combined platform capabilities are a differentiator to make explicit in head-to-head comparisons.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">AMS market at $2.66B in 2026, projected $4.35B by 2031 at 10.28% CAGR (Mordor Intelligence). Cloud at 72.62% share, expanding at 12.18% CAGR.</div>
+        </div>
+        <div class="item">
+          <div class="desc">Asia-Pacific is the fastest-growing AMS region at 12.95% CAGR. Relevant for associations with international chapters.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fundraising -->
+  <div class="tab-panel" id="tab-fundraising">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">peer to peer fundraising AI personalization</span>
+          <span class="tag rising">GoFundMe Pro vs Classy</span>
+          <span class="tag rising">online giving platform comparison 2026</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"What the Classy-to-GoFundMe Pro rebrand means for mid-market nonprofits." Real news hook. Clients re-evaluating now. Explain Salesforce-dependency tradeoffs vs. purpose-built fundraising platforms.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">Email</div>
+          <div class="desc">"The consolidation question your board is probably asking." Speak to fundraising directors watching the market compress. Position GiveSmart plus MomentiveIQ data as stability.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Bloomerang + Qgiv</div>
+          <div class="desc">Acquisition combines donor management with event and payment processing. Broader offering for smaller nonprofits. Formal competitive review warranted.</div>
+        </div>
+        <div class="item">
+          <div class="label">GoFundMe Pro (formerly Classy)</div>
+          <div class="desc">Salesforce CRM integration is the main pitch to enterprise nonprofits. Clients with complex Salesforce environments may find migration appealing.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">G2 "Best Fundraising Software: User Reviews from May 2026" is live and being referenced in sales conversations. Review velocity matters for organic discovery now.</div>
+        </div>
+        <div class="item">
+          <div class="desc">Givebutter continues to gain traction as a free-tier disruptor for smaller nonprofits. Worth monitoring as a low-end threat.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events -->
+  <div class="tab-panel" id="tab-events">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">hybrid event AI tools for associations</span>
+          <span class="tag rising">nonprofit event platform comparison 2026</span>
+          <span class="tag rising">event management software member engagement</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"Why 85% of event planners use dedicated software and most associations still do not." Frame as a gap. Show what purpose-built association event tools deliver that generic platforms cannot.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">LinkedIn</div>
+          <div class="desc">"The hybrid event is not dead. It is just finally getting good software." Speak to the reality that hybrid execution was rough in 2021 to 2023. The tools have caught up.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Cvent</div>
+          <div class="desc">Continues to dominate enterprise event space. Comparisons focus on price, nonprofit-specific features, and AMS integration.</div>
+        </div>
+        <div class="item">
+          <div class="label">A2Z Events</div>
+          <div class="desc">Niche player in trade show and floor plan management. Relevant for associations running conferences with exhibitor components.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">Multiple 2026 nonprofit event software guides updated in May 2026, signaling active buyer research in this category right now.</div>
+        </div>
+        <div class="item">
+          <div class="desc">No notable funding or acquisition events in this category in the past 72 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LMS -->
+  <div class="tab-panel" id="tab-lms">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">AI-powered LMS for associations</span>
+          <span class="tag rising">continuing education credit tracking automation</span>
+          <span class="tag rising">LMS professional development 2026</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"What association members actually want from online learning in 2026." Members want short, credit-bearing mobile modules with automatic CE submission to licensing bodies. Tie to the micro-credentials trend.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">Email to Prospects</div>
+          <div class="desc">"Your members are earning credentials on LinkedIn Learning. Here is how associations win that back." Position purpose-built CE software as the differentiator against general-purpose platforms.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">OasisLMS</div>
+          <div class="desc">Positioning specifically for associations and healthcare CE. Updated guides rank them prominently in May 2026 evaluation cycles.</div>
+        </div>
+        <div class="item">
+          <div class="label">Path LMS / Crowd Wisdom</div>
+          <div class="desc">Primary purpose-built alternatives for association LMS buyers. Remain active in comparison searches.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">Research.com "10 Top LMS Trends for 2026" cites AI personalization, mobile-first delivery, and competency-based learning as top drivers. Being referenced in buyer evaluation processes.</div>
+        </div>
+        <div class="item">
+          <div class="desc">No major funding or acquisition events in this category in the past 72 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accounting -->
+  <div class="tab-panel" id="tab-accounting">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">nonprofit fund accounting automation 2026</span>
+          <span class="tag rising">MIP Fund Accounting vs Sage Intacct</span>
+          <span class="tag rising">AI-enabled nonprofit accounting real-time visibility</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"62% of nonprofits now automate fund tracking. Here is what the other 38% are missing." Use market data as the hook. Walk through automated restricted fund tracking, grant compliance alerts, and audit-ready reporting.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">Sales / Email</div>
+          <div class="desc">"Month-end close in 34% less time." AI-enabled reconciliation tools are achieving that. Speak to finance directors who dread month-end. Ground it in what MIP Fund Accounting delivers.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Sage Intacct</div>
+          <div class="desc">AICPA-preferred solution at the enterprise end. High search volume on "MIP vs Sage Intacct" confirms active comparison shopping. MIP's nonprofit-native design and accessible price are key differentiators.</div>
+        </div>
+        <div class="item">
+          <div class="label">Blackbaud Financial Edge NXT</div>
+          <div class="desc">Continues to appear in nonprofit accounting comparisons. Platform lock-in is a pain point MIP can address.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">Nonprofit Accounting Software Market at $373.75M in 2026, growing to $908.75M by 2035 at 10.5% CAGR. Grant compliance requirements are driving urgency.</div>
+        </div>
+        <div class="item">
+          <div class="desc">Armanino's 2026 nonprofit trends piece calls real-time financial visibility a board-level priority. Good reference for executive-facing content.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certification -->
+  <div class="tab-panel" id="tab-certification">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">Open Badge 3.0 association certification</span>
+          <span class="tag rising">micro-credentials for professional associations</span>
+          <span class="tag rising">digital credential wallet integration</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"Your members want credentials they can share on LinkedIn in one click. Does your certification program deliver that?" Open with 96% employer acceptance and 17% micro-credentials CAGR. Speak to credentialing directors fielding member requests.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">LinkedIn</div>
+          <div class="desc">"2026 is being called the Year of Digital Credentials. Here is what that means for association certification programs." Short, punchy. Drive discovery from certification professionals searching for platform upgrades.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Certifier / Sertifier</div>
+          <div class="desc">Consumer-facing digital badge platforms gaining traction. Associations sometimes use them as workarounds. Signals unmet demand.</div>
+        </div>
+        <div class="item">
+          <div class="label">Open Badge 3.0 / W3C Verifiable Credentials</div>
+          <div class="desc">Open standards movement reshaping buyer expectations. Associations now ask whether platforms support portable, blockchain-verifiable credentials.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">EU, Singapore, India, Australia, and the US all developing digital identity frameworks that formally recognize verifiable credentials. Regulatory tailwinds accelerating adoption.</div>
+        </div>
+        <div class="item">
+          <div class="desc">Multiple major outlets published 2026 digital credentials guides this month. Buyer education is at a high point. Good timing for owned content.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Career Center -->
+  <div class="tab-panel" id="tab-career">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">association job board AI matching</span>
+          <span class="tag rising">member career benefit ROI</span>
+          <span class="tag rising">niche job board programmatic advertising</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"73% of your members want a job board. Only 46% say you deliver one worth using." That gap is the story. Show the revenue upside: associations like AIA Colorado generate $50,000 to $100,000/year from their job board.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">Email / Sales</div>
+          <div class="desc">"Your career center could be a revenue line, not a cost center." Frame job board software as a self-funding investment. Use revenue and member satisfaction data as proof.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">YM Careers (now Momentive)</div>
+          <div class="desc">Part of the Momentive Software family. Integration between YM Careers and other Momentive products is a differentiator to make explicit in competitive conversations.</div>
+        </div>
+        <div class="item">
+          <div class="label">Web Scribble</div>
+          <div class="desc">Niche competitor focused on association career centers. Worth monitoring for pricing and feature moves.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">JobBoardSoftware.io published "Why Associations Are Choosing Job Board Software in 2026" with updated member usage and ROI data.</div>
+        </div>
+        <div class="item">
+          <div class="desc">Job Board Software Market growing at 7.78% CAGR through 2035. Steady tailwind supporting investment conversations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Volunteer -->
+  <div class="tab-panel" id="tab-volunteer">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">volunteer experience design nonprofit</span>
+          <span class="tag rising">skill-based volunteering platform 2026</span>
+          <span class="tag rising">AI volunteer churn prediction</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"The shift from volunteer volume to volunteer experience. What it means for your programs." Nonprofits are competing for volunteers now. Organizations winning offer skill-aligned roles, personalized communication, and flexible scheduling.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">LinkedIn</div>
+          <div class="desc">"Today's volunteer is tomorrow's major donor. Is your software built for that?" Tie volunteer engagement data to fundraising outcomes. Speak to the 360-degree supporter view modern platforms enable.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Better Impact</div>
+          <div class="desc">Trusted by 85,000 organizations. Active in May 2026 review cycles on SoftwareAdvice. Strong word-of-mouth.</div>
+        </div>
+        <div class="item">
+          <div class="label">Galaxy Digital</div>
+          <div class="desc">Appears in top-10 lists for nonprofit volunteer management. Positioning around community impact tracking.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">Momentive Software published "Volunteer Trends 2026: Insights for Nonprofits" on its own blog. Strong owned-media asset to amplify via LinkedIn and email.</div>
+        </div>
+        <div class="item">
+          <div class="desc">DEI-focused volunteer recruitment is a rising priority in 2026 content. An angle worth developing for association volunteer program managers.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donor Management -->
+  <div class="tab-panel" id="tab-donor">
+    <div class="section-grid">
+      <div class="section-card rising">
+        <h3><span class="icon">📈</span> Rising Queries</h3>
+        <div class="tag-list">
+          <span class="tag rising">nonprofit CRM AI donor engagement 2026</span>
+          <span class="tag rising">all-in-one nonprofit CRM fundraising platform</span>
+          <span class="tag rising">donor management software comparison May 2026</span>
+        </div>
+      </div>
+      <div class="section-card angles">
+        <h3><span class="icon">✏️</span> Content Angles</h3>
+        <div class="item">
+          <div class="angle-title">Blog</div>
+          <div class="desc">"54% of nonprofits use an all-in-one CRM and fundraising platform. Here is what they gained and what they gave up." Create a real decision-making frame. Speak to development directors weighing consolidation vs. best-of-breed.</div>
+        </div>
+        <div class="item">
+          <div class="angle-title">Email</div>
+          <div class="desc">"Your donor data is sitting in four places. Here is the cost of that." Speak to disconnected donor records. Position MomentiveIQ's unified data layer as the solution.</div>
+        </div>
+      </div>
+      <div class="section-card competitors">
+        <h3><span class="icon">👁️</span> Competitor Watch</h3>
+        <div class="item">
+          <div class="label">Virtuous</div>
+          <div class="desc">Most active AI positioning in the donor CRM category. Co-authored the 2026 Nonprofit AI Adoption Report. Generating significant earned media targeting mid-to-large nonprofits.</div>
+        </div>
+        <div class="item">
+          <div class="label">Neon CRM</div>
+          <div class="desc">Praised in current reviews for intuitive UX and campaign/event organization. Strong in the mid-market.</div>
+        </div>
+      </div>
+      <div class="section-card news">
+        <h3><span class="icon">📰</span> News Hooks</h3>
+        <div class="item">
+          <div class="desc">Nonprofit CRM market at $4.25B (2024), projected $7.35B by 2031. 65% of nonprofits upgraded donor management software in 2022 to 2023. Buyers still in active evaluation cycles.</div>
+        </div>
+        <div class="item">
+          <div class="desc">G2 "Best Donor Management Software: User Reviews from May 2026" is live. Current review velocity matters for organic discovery.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tabs-wrap -->
+
+<div class="footer">Last refreshed Friday, May 15, 2026 at 08:00 UTC &nbsp;|&nbsp; Momentive Daily Trends Scan &nbsp;|&nbsp; No carry-over from prior run (first run in outputs folder)</div>
+
+<script>
+  document.getElementById('tabs').addEventListener('click', function(e) {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    const tabId = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tabId).classList.add('active');
+  });
+</script>
+</body>
+</html>
