@@ -1,610 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Momentive Daily Trends Brief, Tuesday, May 20, 2026</title>
-    <style>
-        :root {
-            --primary: #0f172a;
-            --accent: #dc2626;
-            --accent-light: #fee2e2;
-            --bg: #ffffff;
-            --border: #e5e7eb;
-            --text: #1f2937;
-            --text-light: #6b7280;
-            --bg-light: #f9fafb;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--bg);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header {
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .header h1 {
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .meta {
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-
-        .meta p {
-            margin: 0.25rem 0;
-        }
-
-        .draft-notice {
-            background: var(--accent-light);
-            border-left: 4px solid var(--accent);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.875rem;
-        }
-
-        .surge-box {
-            background: var(--bg-light);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .surge-box h2 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .surge-content {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .top-3 {
-            background: var(--bg-light);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .top-3 h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .top-3 ol {
-            padding-left: 1.5rem;
-        }
-
-        .top-3 li {
-            margin-bottom: 0.75rem;
-            line-height: 1.6;
-        }
-
-        .tabs {
-            margin-bottom: 2rem;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border);
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 0.75rem 1rem;
-            border: none;
-            background: transparent;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-light);
-            transition: all 0.2s;
-            margin-bottom: -2px;
-        }
-
-        .tab-btn:hover {
-            color: var(--text);
-        }
-
-        .tab-btn.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .content-section {
-            margin-bottom: 2rem;
-        }
-
-        .content-section h4 {
-            font-size: 1rem;
-            margin: 1.5rem 0 1rem 0;
-            color: var(--text);
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        .item {
-            margin-bottom: 1.25rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .item:last-child {
-            border-bottom: none;
-        }
-
-        .item-text {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tag-new {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .tag-carry {
-            background: #f3f4f6;
-            color: #6b7280;
-        }
-
-        .tag-surge {
-            background: var(--accent-light);
-            color: var(--accent);
-        }
-
-        .pub-date {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin: 0.25rem 0;
-        }
-
-        .src-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-            border-radius: 4px;
-            padding: 2px 6px;
-            font-size: 0.8rem;
-            color: #0369a1;
-            text-decoration: none;
-            margin-left: 4px;
-            vertical-align: middle;
-        }
-
-        .src-link:hover {
-            background: #e0f2fe;
-        }
-
-        .footer {
-            border-top: 2px solid var(--border);
-            padding-top: 1.5rem;
-            margin-top: 2rem;
-            font-size: 0.875rem;
-            color: var(--text-light);
-            text-align: center;
-        }
-
-        .no-signal {
-            color: var(--text-light);
-            font-style: italic;
-        }
-
-        .collapsible {
-            margin-top: 1.5rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-        }
-
-        .collapsible-header {
-            padding: 0.75rem 1rem;
-            background: var(--bg-light);
-            cursor: pointer;
-            user-select: none;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .collapsible-header:hover {
-            background: #f3f4f6;
-        }
-
-        .collapsible-header::after {
-            content: "+";
-            font-weight: bold;
-        }
-
-        .collapsible-header.open::after {
-            content: "−";
-        }
-
-        .collapsible-body {
-            display: none;
-            padding: 1rem;
-            background: white;
-            border-top: 1px solid var(--border);
-        }
-
-        .collapsible-body.open {
-            display: block;
-        }
-
-        .sources-list {
-            list-style: none;
-        }
-
-        .sources-list li {
-            margin-bottom: 0.5rem;
-        }
-
-        .sources-list a {
-            color: #0369a1;
-            text-decoration: none;
-        }
-
-        .sources-list a:hover {
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momentive Daily Trends — May 20, 2026 DRAFT</title>
+<style>
+  :root { color-scheme: light; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #f5f5f5;
+  }
+  .draft-banner {
+    background: #fef3c7;
+    border-bottom: 2px solid #f59e0b;
+    padding: 8px 20px;
+    font-size: 13px;
+    color: #92400e;
+    text-align: center;
+    font-weight: 500;
+  }
+  .page-header {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .page-header h1 { font-size: 18px; font-weight: 700; color: #111; }
+  .page-header .meta { font-size: 12px; color: #6b7280; }
+  .logo-mark { color: #2563eb; font-weight: 800; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .callout-surge {
+    background: #fff7ed;
+    border: 2px solid #f97316;
+  }
+  .callout-surge h2 { color: #c2410c; font-size: 15px; margin-bottom: 10px; }
+  .callout-top3 {
+    background: #eff6ff;
+    border: 2px solid #3b82f6;
+  }
+  .callout-top3 h2 { color: #1d4ed8; font-size: 15px; margin-bottom: 10px; }
+  .surge-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .badge {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge-new { background: #d1fae5; color: #065f46; }
+  .badge-surging { background: #fee2e2; color: #991b1b; }
+  .badge-carryover { background: #f3f4f6; color: #374151; }
+  .badge-cooling { background: #f9fafb; color: #9ca3af; }
+  .score {
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 500;
+  }
+  .tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 0;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    padding: 8px 13px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6b7280;
+    border-radius: 4px 4px 0 0;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: #2563eb; }
+  .tab-btn.active { color: #2563eb; border-bottom-color: #2563eb; background: #eff6ff; }
+  .tab-panel { display: none; background: #fff; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; padding: 20px; }
+  .tab-panel.active { display: block; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #6b7280;
+    margin: 14px 0 6px;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 4px;
+  }
+  .section-label:first-child { margin-top: 0; }
+  .item-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .item-row .item-text { flex: 1; }
+  .angle-block {
+    background: #f8fafc;
+    border-left: 3px solid #2563eb;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-style: italic;
+    color: #1e3a5f;
+    border-radius: 0 4px 4px 0;
+  }
+  .competitor-block {
+    background: #fdf2f8;
+    border-left: 3px solid #a21caf;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border-radius: 0 4px 4px 0;
+  }
+  .competitor-block strong { color: #701a75; }
+  .news-block {
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border-radius: 0 4px 4px 0;
+  }
+  .top3-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .top3-num {
+    font-weight: 800;
+    font-size: 20px;
+    color: #bfdbfe;
+    line-height: 1.2;
+    min-width: 24px;
+  }
+  .no-signal {
+    font-size: 12px;
+    color: #9ca3af;
+    font-style: italic;
+  }
+  details {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  summary {
+    padding: 12px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 13px;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "▶ "; font-size: 10px; }
+  details[open] summary::before { content: "▼ "; }
+  details .details-inner { padding: 0 16px 16px; font-size: 13px; }
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+    padding: 24px 16px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 24px;
+  }
+  a { color: #2563eb; }
+  strong { font-weight: 600; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Momentive Daily Trends Brief</h1>
-            <div class="meta">
-                <p><strong>Tuesday, May 20, 2026</strong></p>
-                <p>Run timestamp: 09:33 UTC</p>
-                <p><strong style="color: var(--accent);">DRAFT</strong> - Not yet published. Awaiting Philip's review.</p>
-                <p style="margin-top: 0.5rem;"><small>Freshness window: Past 7 days (rising queries), 14 days (news), 30 days (competitor moves)</small></p>
-            </div>
-        </div>
 
-        <div class="draft-notice">
-            <strong>Status:</strong> DRAFT, pending Philip's review and auto-sync to GitHub Pages
-        </div>
+<!-- DRAFT BANNER -->
+<div class="draft-banner">
+  ⚠️ DRAFT — Not yet published. Reply "approved" to auto-sync to GitHub Pages.
+</div>
 
-        <div class="surge-box">
-            <h2>Now surging ▲</h2>
-            <div class="surge-content">
-                No surge signal today on previously tracked items.
-            </div>
-        </div>
+<!-- HEADER -->
+<div class="page-header">
+  <div>
+    <h1><span class="logo-mark">Momentive</span> Daily Trends Brief</h1>
+    <div class="meta">Tuesday, May 20, 2026 &nbsp;|&nbsp; Run: 09:33 local &nbsp;|&nbsp; Quiet cycle — 3 items tracked</div>
+  </div>
+  <div class="meta" style="text-align:right">10 solution groups<br>3 items tracked</div>
+</div>
 
-        <div class="top-3">
-            <h2>Top 3 things to know today</h2>
-            <ol>
-                <li><strong>Bonterra advances case management with Que:</strong> AI assistant embeds directly into Apricot case management workflows, reducing search time and keeping data secure in high-sensitivity environments.</li>
-                <li><strong>AI adoption paradox deepens:</strong> 92% of nonprofits use AI tools, yet only 7% report major impact. The gap reflects governance and workflow gaps, not tool gaps.</li>
-                <li><strong>Microsoft adjusts nonprofit 365 pricing:</strong> Nonprofit discounts (60-75% off commercial rates) continue, with new pricing effective July 1, 2026. Copilot licensing added three-year purchasing option in May.</li>
-            </ol>
-        </div>
+<div class="container">
 
-        <div class="tabs">
-            <div class="tab-buttons">
-                <button class="tab-btn active" onclick="switchTab(event, 'tab-1')">MomentiveIQ</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-2')">AMS</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-3')">Fundraising</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-4')">Events</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-5')">LMS</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-6')">Accounting</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-7')">Certification</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-8')">Careers</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-9')">Volunteers</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-10')">Donors</button>
-            </div>
+<!-- SURGE CALLOUT -->
+<div class="callout callout-surge">
+  <h2>🔥 Highest-Velocity Items Today</h2>
+  <p style="font-size:12px;color:#92400e;margin-bottom:10px;">Quiet news cycle. No surge signal on previously tracked items.</p>
+  <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>Bonterra launches Que for Apricot</strong> — AI case management assistant</span><span class="score">score 7</span></div>
+  <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>92% of nonprofits adopting AI, 7% see major impact</strong></span><span class="score">score 8</span></div>
+  <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>Microsoft 365 nonprofit pricing update</strong> — Copilot 3-year option added</span><span class="score">score 5</span></div>
+</div>
 
-            <div id="tab-1" class="tab-content active">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TOP 3 CALLOUT -->
+<div class="callout callout-top3">
+  <h2>📌 Top 3 Things to Know Today</h2>
+  <div class="top3-item">
+    <div class="top3-num">1</div>
+    <div><strong>Bonterra advances case management with Que.</strong> AI assistant embeds directly into Apricot workflows, reducing search time and keeping data secure in high-sensitivity environments. Signals continued investment in AI-powered case management.</div>
+  </div>
+  <div class="top3-item">
+    <div class="top3-num">2</div>
+    <div><strong>AI adoption paradox deepens.</strong> 92% of nonprofits use AI tools, yet only 7% report major impact. The gap reflects governance and workflow gaps, not tool gaps. Clients need guidance on AI integration strategy, not just AI buying.</div>
+  </div>
+  <div class="top3-item">
+    <div class="top3-num">3</div>
+    <div><strong>Microsoft adjusts nonprofit 365 pricing.</strong> Nonprofit discounts (60-75% off commercial rates) continue. New Copilot licensing added three-year purchasing option in May. Pricing changes effective July 1, 2026.</div>
+  </div>
+</div>
 
-            <div id="tab-2" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TABS -->
+<div class="tabs-nav">
+  <button class="tab-btn active" onclick="showTab('t1',this)">MomentiveIQ</button>
+  <button class="tab-btn" onclick="showTab('t2',this)">AMS</button>
+  <button class="tab-btn" onclick="showTab('t3',this)">Fundraising</button>
+  <button class="tab-btn" onclick="showTab('t4',this)">Events</button>
+  <button class="tab-btn" onclick="showTab('t5',this)">LMS</button>
+  <button class="tab-btn" onclick="showTab('t6',this)">MIP Accounting</button>
+  <button class="tab-btn" onclick="showTab('t7',this)">Certification</button>
+  <button class="tab-btn" onclick="showTab('t8',this)">Career Center</button>
+  <button class="tab-btn" onclick="showTab('t9',this)">Volunteer Mgmt</button>
+  <button class="tab-btn" onclick="showTab('t10',this)">Donor Mgmt</button>
+</div>
 
-            <div id="tab-3" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <div class="item">
-                        <div class="item-text">92% of nonprofits adopting AI, but only 7% seeing major impact</div>
-                        <div class="pub-date">(published 2026-05-20)</div>
-                        <a href="https://www.nonprofitpro.com/article/nonprofit-ai-adoption-hits-92-but-only-7-see-major-impact/" target="_blank" class="src-link">↗ NonProfit PRO</a>
-                    </div>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <div class="item">
-                        <div class="item-text">Bonterra launches Que for Bonterra Apricot: AI-powered assistant for case management</div>
-                        <div class="pub-date">(published 2026-05-18)</div>
-                        <a href="https://www.bonterratech.com/product/apricot" target="_blank" class="src-link">↗ Bonterra</a>
-                    </div>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <div class="item">
-                        <div class="item-text">AI in donor engagement works best when built into existing workflows, not bolted on as a separate tool. Clients who embed AI natively reduce data silos and preserve human context.</div>
-                    </div>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TAB 1: MomentiveIQ -->
+<div class="tab-panel active" id="t1">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-            <div id="tab-4" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TAB 2: AMS -->
+<div class="tab-panel" id="t2">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-            <div id="tab-5" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TAB 3: Fundraising -->
+<div class="tab-panel" id="t3">
+  <div class="section-label">Rising Queries</div>
+  <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>Nonprofit AI adoption 2026</strong> — 92% using AI, 7% seeing major impact</span><span class="score">score 8</span></div>
+  <div class="section-label">Content Angles</div>
+  <div class="angle-block">AI in donor engagement works best when built into existing workflows, not bolted on as a separate tool. Clients who embed AI natively reduce data silos and preserve human context.</div>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <div class="news-block"><strong>Bonterra launches Que for Apricot:</strong> AI-powered case management assistant that helps staff understand participant history and reduce time spent searching records. (published 2026-05-18)</div>
+</div>
 
-            <div id="tab-6" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TAB 4: Events -->
+<div class="tab-panel" id="t4">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-            <div id="tab-7" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TAB 5: LMS -->
+<div class="tab-panel" id="t5">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-            <div id="tab-8" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TAB 6: MIP Accounting -->
+<div class="tab-panel" id="t6">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-            <div id="tab-9" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <p class="no-signal">No notable signal in the past 7 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <p class="no-signal">No notable signal in the past 14 days.</p>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
+<!-- TAB 7: Certification -->
+<div class="tab-panel" id="t7">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-            <div id="tab-10" class="tab-content">
-                <div class="content-section">
-                    <h4>Rising Queries</h4>
-                    <div class="item">
-                        <div class="item-text">92% of nonprofits adopting AI, but only 7% seeing major impact</div>
-                        <div class="pub-date">(published 2026-05-20)</div>
-                        <a href="https://www.nonprofitpro.com/article/nonprofit-ai-adoption-hits-92-but-only-7-see-major-impact/" target="_blank" class="src-link">↗ NonProfit PRO</a>
-                    </div>
-                </div>
-                <div class="content-section">
-                    <h4>News Hooks</h4>
-                    <div class="item">
-                        <div class="item-text">Bonterra launches Que for Bonterra Apricot: AI-powered assistant that helps staff understand participant history and reduce search time</div>
-                        <div class="pub-date">(published 2026-05-18)</div>
-                        <a href="https://www.bonterratech.com/product/apricot" target="_blank" class="src-link">↗ Bonterra</a>
-                    </div>
-                </div>
-                <div class="content-section">
-                    <h4>Content Angles</h4>
-                    <div class="item">
-                        <div class="item-text">AI governance matters as much as AI tools. Clients without clear policies on AI use see scattered, individual experiments. Those with governance frameworks see 3x higher success rates in turning AI adoption into measurable outcomes.</div>
-                    </div>
-                </div>
-                <div class="content-section">
-                    <h4>Competitor Watch</h4>
-                    <p class="no-signal">No notable signal in the past 30 days.</p>
-                </div>
-            </div>
-        </div>
+<!-- TAB 8: Career Center -->
+<div class="tab-panel" id="t8">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-        <div style="margin-bottom: 2rem; padding: 1rem; background: var(--bg-light); border-radius: 6px;">
-            <h3 style="margin-bottom: 1rem;">Cross-sector signal</h3>
-            <div class="item">
-                <div class="item-text">Microsoft 365 nonprofit pricing update: Nonprofit discounts of 60-75% continue through 2026. New Copilot licensing now supports three-year purchase agreements (effective May 1, 2026). Pricing changes take effect July 1, 2026.</div>
-                <div class="pub-date">(published 2026-05-09)</div>
-                <a href="https://www.microsoft.com/en-us/licensing/news/2026-m365-packaging-pricing-updates" target="_blank" class="src-link">↗ Microsoft Licensing</a>
-            </div>
-        </div>
+<!-- TAB 9: Volunteer Mgmt -->
+<div class="tab-panel" id="t9">
+  <div class="section-label">Rising Queries</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Content Angles</div>
+  <p class="no-signal">No notable signal in the past 7 days.</p>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <p class="no-signal">No notable signal in the past 14 days.</p>
+</div>
 
-        <div class="collapsible" style="margin: 2rem 0;">
-            <div class="collapsible-header" onclick="toggleCollapsible(event)">Cooling Items</div>
-            <div class="collapsible-body">
-                <p style="color: var(--text-light);">None to report.</p>
-            </div>
-        </div>
+<!-- TAB 10: Donor Mgmt -->
+<div class="tab-panel" id="t10">
+  <div class="section-label">Rising Queries</div>
+  <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>Nonprofit AI adoption 2026</strong> — 92% using AI, 7% seeing major impact</span><span class="score">score 8</span></div>
+  <div class="section-label">Content Angles</div>
+  <div class="angle-block">AI governance matters as much as AI tools. Clients without clear policies on AI use see scattered, individual experiments. Those with governance frameworks see 3x higher success rates in turning AI adoption into measurable outcomes.</div>
+  <div class="section-label">Competitor Watch</div>
+  <p class="no-signal">No notable signal in the past 30 days.</p>
+  <div class="section-label">News Hooks</div>
+  <div class="news-block"><strong>Bonterra launches Que for Apricot:</strong> AI-powered assistant embedded in case management to help staff understand participant history and reduce time spent in data searches. (published 2026-05-18)</div>
+</div>
 
-        <div class="collapsible" style="margin: 2rem 0;">
-            <div class="collapsible-header" onclick="toggleCollapsible(event)">All Sources</div>
-            <div class="collapsible-body">
-                <ul class="sources-list">
-                    <li><a href="https://www.bonterratech.com/product/apricot" target="_blank">Apricot Software: Bonterra</a></li>
-                    <li><a href="https://www.nonprofitpro.com/article/nonprofit-ai-adoption-hits-92-but-only-7-see-major-impact/" target="_blank">NonProfit PRO: Nonprofit AI Adoption Report</a></li>
-                    <li><a href="https://www.microsoft.com/en-us/licensing/news/2026-m365-packaging-pricing-updates" target="_blank">Microsoft 365 Pricing and Packaging Updates</a></li>
-                </ul>
-            </div>
-        </div>
+<!-- CROSS-SECTOR -->
+<div class="callout" style="background:#f8fafc;border:1px solid #e5e7eb;margin-top:16px;margin-bottom:16px">
+  <h3 style="font-size:14px;font-weight:700;margin-bottom:10px">Cross-sector signal</h3>
+  <div class="news-block"><strong>Microsoft 365 nonprofit pricing update:</strong> Nonprofit discounts (60-75%) continue through 2026. Copilot licensing now supports three-year purchase agreements (effective May 1, 2026). Pricing changes take effect July 1, 2026. (published 2026-05-09)</div>
+</div>
 
-        <div class="footer">
-            <p>Last refreshed: May 20, 2026 at 09:33 UTC</p>
-            <p><strong>Status:</strong> DRAFT - Awaiting Philip's approval to publish</p>
-            <p style="margin-top: 1rem;"><small>To approve and auto-publish, reply "approved" in the chat.</small></p>
-        </div>
-    </div>
+<!-- COOLING -->
+<details>
+  <summary>Cooling items (footnote)</summary>
+  <div class="details-inner">
+    <p style="color:#6b7280">None to report. This is a quiet news cycle.</p>
+  </div>
+</details>
 
-    <script>
-        function switchTab(event, tabId) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(tab => tab.classList.remove('active'));
+<!-- SOURCES -->
+<details>
+  <summary>Sources</summary>
+  <div class="details-inner">
+    <ul style="margin-left:16px;line-height:2">
+      <li><a href="https://www.bonterratech.com/product/apricot">Apricot Software — Bonterra</a></li>
+      <li><a href="https://www.nonprofitpro.com/article/nonprofit-ai-adoption-hits-92-but-only-7-see-major-impact/">Nonprofit AI Adoption Report 2026 — NonProfit PRO</a></li>
+      <li><a href="https://www.microsoft.com/en-us/licensing/news/2026-m365-packaging-pricing-updates">Microsoft 365 Pricing and Packaging Updates</a></li>
+    </ul>
+  </div>
+</details>
 
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach(btn => btn.classList.remove('active'));
+<!-- REVIEW CHECKPOINT -->
+<div class="callout" style="background:#f8fafc;border:1px solid #e5e7eb;margin-top:16px">
+  <h2 style="font-size:14px;font-weight:700;margin-bottom:10px">Review Checkpoint</h2>
+  <p style="font-size:13px;margin-bottom:8px"><strong>Proposed mode:</strong> Structured review (Mode 2). No urgent banner.</p>
+  <p style="font-size:13px;margin-bottom:8px"><strong>What to review:</strong> Quiet cycle — 3 items total, all NEW, no surges. Cross-sector Microsoft pricing change may affect clients' budgeting. AI adoption data trending strongly but no product-specific angles yet.</p>
+  <p style="font-size:13px"><strong>To approve and auto-publish:</strong> Reply "approved" to rename and trigger GitHub Pages sync.</p>
+</div>
 
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
-        }
+</div>
 
-        function toggleCollapsible(event) {
-            const header = event.target;
-            const body = header.nextElementSibling;
-            header.classList.toggle('open');
-            body.classList.toggle('open');
-        }
-    </script>
+<div class="footer">
+  Last refreshed: 09:33, Tuesday May 20, 2026 &nbsp;|&nbsp; Status: DRAFT &nbsp;|&nbsp; Approve in Claude to publish to ppwong83.github.io/Momentive-Daily-Trends/
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 </body>
 </html>
