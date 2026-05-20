@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momentive Daily Trends — May 17, 2026 DRAFT</title>
+<style>
+  :root { color-scheme: light; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #f5f5f5;
+  }
+  .urgent-banner {
+    background: #b91c1c;
+    color: #fff;
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .urgent-banner a { color: #fecaca; text-decoration: underline; }
+  .draft-banner {
+    background: #fef3c7;
+    border-bottom: 2px solid #f59e0b;
+    padding: 8px 20px;
+    font-size: 13px;
+    color: #92400e;
+    text-align: center;
+    font-weight: 500;
+  }
+  .page-header {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .page-header h1 { font-size: 18px; font-weight: 700; color: #111; }
+  .page-header .meta { font-size: 12px; color: #6b7280; }
+  .logo-mark { color: #2563eb; font-weight: 800; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+  }
+  .callout-surge {
+    background: #fff7ed;
+    border: 2px solid #f97316;
+  }
+  .callout-surge h2 { color: #c2410c; font-size: 15px; margin-bottom: 10px; }
+  .callout-top3 {
+    background: #eff6ff;
+    border: 2px solid #3b82f6;
+  }
+  .callout-top3 h2 { color: #1d4ed8; font-size: 15px; margin-bottom: 10px; }
+  .surge-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .badge {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge-new { background: #d1fae5; color: #065f46; }
+  .badge-surging { background: #fee2e2; color: #991b1b; }
+  .badge-carryover { background: #f3f4f6; color: #374151; }
+  .badge-cooling { background: #f9fafb; color: #9ca3af; }
+  .score {
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 500;
+  }
+  .tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 0;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    padding: 8px 13px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6b7280;
+    border-radius: 4px 4px 0 0;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: #2563eb; }
+  .tab-btn.active { color: #2563eb; border-bottom-color: #2563eb; background: #eff6ff; }
+  .tab-panel { display: none; background: #fff; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; padding: 20px; }
+  .tab-panel.active { display: block; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #6b7280;
+    margin: 14px 0 6px;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 4px;
+  }
+  .section-label:first-child { margin-top: 0; }
+  .item-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .item-row .item-text { flex: 1; }
+  .angle-block {
+    background: #f8fafc;
+    border-left: 3px solid #2563eb;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-style: italic;
+    color: #1e3a5f;
+    border-radius: 0 4px 4px 0;
+  }
+  .competitor-block {
+    background: #fdf2f8;
+    border-left: 3px solid #a21caf;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border-radius: 0 4px 4px 0;
+  }
+  .competitor-block strong { color: #701a75; }
+  .news-block {
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border-radius: 0 4px 4px 0;
+  }
+  .top3-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .top3-num {
+    font-weight: 800;
+    font-size: 20px;
+    color: #bfdbfe;
+    line-height: 1.2;
+    min-width: 24px;
+  }
+  details {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  summary {
+    padding: 12px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 13px;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "▶ "; font-size: 10px; }
+  details[open] summary::before { content: "▼ "; }
+  details .details-inner { padding: 0 16px 16px; font-size: 13px; }
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+    padding: 24px 16px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 24px;
+  }
+  a { color: #2563eb; }
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- URGENT BANNER -->
+<div class="urgent-banner">
+  <span>🚨</span>
+  <div>
+    <strong>URGENT TODAY:</strong> Charitable deduction law ("One Big Beautiful Bill") nets $81B less in giving over 10 years. AmeriCorps $400M cut impacts 85% of nonprofit clients. Better Impact acquires Galaxy Digital — largest volunteer tech consolidation to date.
+    See <strong>URGENT-2026-05-17.md</strong> for actions.
+  </div>
+</div>
+
+<!-- DRAFT BANNER -->
+<div class="draft-banner">
+  ⚠️ DRAFT — Not yet published. Reply "approved" to auto-sync to GitHub Pages.
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div>
+    <h1><span class="logo-mark">Momentive</span> Daily Trends Brief</h1>
+    <div class="meta">Sunday, May 17, 2026 &nbsp;|&nbsp; Run: 04:32 local &nbsp;|&nbsp; First run — history initialized</div>
+  </div>
+  <div class="meta" style="text-align:right">10 solution groups<br>17 items tracked</div>
+</div>
+
+<div class="container">
+
+  <!-- SURGE CALLOUT -->
+  <div class="callout callout-surge">
+    <h2>🔥 Highest-Velocity Items Today</h2>
+    <p style="font-size:12px;color:#92400e;margin-bottom:10px;">First run — no prior averages exist. All items tagged [NEW]. Ranked by today's velocity score.</p>
+    <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>Federal funding cuts: 85% of nonprofits impacted</strong> (AmeriCorps $400M cut)</span><span class="score">score 9</span></div>
+    <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>"One Big Beautiful Bill" charitable deduction change</strong> — nets $81B less giving over 10 yrs</span><span class="score">score 8</span></div>
+    <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>2026 Nonprofit AI Adoption Report</strong> — 92% use AI, 7% see major impact</span><span class="score">score 8</span></div>
+    <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>FASB ASU 2025-05 (CECL) 2026 year-end deadline</strong></span><span class="score">score 7</span></div>
+    <div class="surge-item"><span class="badge badge-new">NEW</span> <span><strong>Better Impact acquires Galaxy Digital</strong> — March 11, 2026</span><span class="score">score 7</span></div>
+  </div>
+
+  <!-- TOP 3 CALLOUT -->
+  <div class="callout callout-top3">
+    <h2>📌 Top 3 Things to Know Today</h2>
+    <div class="top3-item">
+      <div class="top3-num">1</div>
+      <div><strong>The "One Big Beautiful Bill" is a structural fundraising headwind.</strong> The new law adds a $1,000 charitable deduction for standard-deduction filers but caps itemized giving in a way that nets $81 billion less to nonprofits over the next decade. Donor management and fundraising clients need a data-driven response now — while the news cycle is live.</div>
+    </div>
+    <div class="top3-item">
+      <div class="top3-num">2</div>
+      <div><strong>Federal funding disruption is the defining story for your clients right now.</strong> Eighty-five percent of nonprofits report being impacted. AmeriCorps just lost 41% of its funding ($400M, 32,000+ members cut). Clients are pivoting hard to private and corporate grants. MIP Fund Accounting and donor management tools are critical infrastructure for this pivot.</div>
+    </div>
+    <div class="top3-item">
+      <div class="top3-num">3</div>
+      <div><strong>The volunteer tech landscape just changed shape.</strong> Better Impact acquired Galaxy Digital on March 11, 2026, creating the largest dedicated volunteer management platform at 85,000+ organizations. New to our tracking system — deserves a sales positioning review this week.</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="showTab('t1',this)">MomentiveIQ</button>
+    <button class="tab-btn" onclick="showTab('t2',this)">AMS</button>
+    <button class="tab-btn" onclick="showTab('t3',this)">Fundraising</button>
+    <button class="tab-btn" onclick="showTab('t4',this)">Events</button>
+    <button class="tab-btn" onclick="showTab('t5',this)">LMS</button>
+    <button class="tab-btn" onclick="showTab('t6',this)">MIP Accounting</button>
+    <button class="tab-btn" onclick="showTab('t7',this)">Certification</button>
+    <button class="tab-btn" onclick="showTab('t8',this)">Career Center</button>
+    <button class="tab-btn" onclick="showTab('t9',this)">Volunteer Mgmt</button>
+    <button class="tab-btn" onclick="showTab('t10',this)">Donor Mgmt</button>
+  </div>
+
+  <!-- TAB 1: MomentiveIQ -->
+  <div class="tab-panel active" id="t1">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"nonprofit AI adoption report 2026"</strong></span><span class="score">score 8</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"Humanity AI initiative foundations nonprofit"</strong></span><span class="score">score 6</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"AI nonprofit governance policy gap"</strong></span><span class="score">score 5</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Ninety-two percent of your clients use AI tools. Only 7% report major impact. The gap isn't the technology — it's the structure behind it. MomentiveIQ closes that gap."</div>
+    <div class="angle-block">"Ten of America's leading foundations just committed $500M to AI that actually serves communities. Your clients need a partner already operating at that level."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Virtuous / Fundraising.AI:</strong> Released 2026 Nonprofit AI Adoption Report (346 nonprofits). 92% adoption, 7% major impact — strong co-branded thought leadership gaining wide coverage.</div>
+    <div class="competitor-block"><strong>Bonterra:</strong> Published 9 social impact AI predictions for 2026. Positioning as a sector authority on AI direction.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>2026 Nonprofit AI Adoption Report:</strong> 92% of nonprofits use AI. Only 7% see major organizational impact. Forty-eight percent have no formal AI governance policy. Source: Virtuous / Fundraising.AI.</div>
+    <div class="news-block"><strong>Humanity AI coalition:</strong> MacArthur, Ford, Omidyar Network, Mellon, and Packard commit $500M to AI for communities. Pooled grantmaking starts in 2026.</div>
+  </div>
+
+  <!-- TAB 2: AMS -->
+  <div class="tab-panel" id="t2">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"association management software AI integration 2026"</strong></span><span class="score">score 6</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"AMS mobile-first platform member experience"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"AMS market growth cloud adoption compliance"</strong></span><span class="score">score 5</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Association members now expect mobile-first access, predictive analytics, and AI-driven personalization. An AMS that cannot deliver those capabilities is already behind."</div>
+    <div class="angle-block">"The AMS market grew 13.9% in 2026. Associations that move now lead when growth normalizes. Those that wait inherit technical debt."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>iMIS / Aptify:</strong> Appearing in best-of roundups alongside cloud-native alternatives. Facing positioning pressure from mobile-first challengers.</div>
+    <div class="competitor-block"><strong>MemberClicks / YourMembership:</strong> Highlighted in mid-market comparisons as established alternatives.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>AMS market at $2.97B in 2026</strong> (13.9% CAGR). Cloud adoption, compliance features, and analytics driving growth.</div>
+    <div class="news-block"><strong>Industry-specific AMS rising:</strong> Healthcare, education, and professional associations seeking tailored platforms. Generic solutions losing ground.</div>
+  </div>
+
+  <!-- TAB 3: Fundraising -->
+  <div class="tab-panel" id="t3">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"subscription fatigue SaaS nonprofit fundraising overhead"</strong></span><span class="score">score 6</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"unified commerce peer-to-peer fundraising platform 2026"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"cryptocurrency donation nonprofit 2026"</strong></span><span class="score">score 4</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Boards are scrutinizing every line item. The nonprofits winning in 2026 run fewer, more powerful tools — not more subscriptions."</div>
+    <div class="angle-block">"Peer-to-peer fundraising, event ticketing, and recurring giving should live in a single dashboard. Your clients shouldn't need three logins to run one campaign."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Givebutter:</strong> "Most-loved" in 2026 reviews. Free-tier base creating acquisition pressure in the mid-market.</div>
+    <div class="competitor-block"><strong>Give Lively:</strong> Entirely free comprehensive platform. Direct price challenge. Monitor for churn risk among cost-sensitive clients.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>Subscription fatigue:</strong> Nonprofit boards forcing line-item justification on every SaaS tool. Platform consolidation is the market response.</div>
+    <div class="news-block"><strong>Unified commerce:</strong> P2P fundraising + event ticketing + recurring giving in one dashboard is now the baseline expectation, not a premium feature.</div>
+  </div>
+
+  <!-- TAB 4: Events -->
+  <div class="tab-panel" id="t4">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"hybrid event budget allocation association 2026"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"AI event management nonprofit engagement tools"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"virtual event platform interactive nonprofit audience"</strong></span><span class="score">score 4</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Associations now put 37% of their event budget into hybrid formats. The platform question is whether both audiences — in-room and remote — get an equal experience."</div>
+    <div class="angle-block">"Real-time polls, live Q&A, and streaming from one platform: clients running hybrid events in 2026 need tools that work as hard as they do."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Bizzabo:</strong> Rising for hybrid event delivery. Unified live/virtual/hybrid in a single platform. Gaining ground in the association space.</div>
+    <div class="competitor-block"><strong>RingCentral Events (formerly Hopin):</strong> Top choice for virtual and hybrid nonprofit events in current roundups. Rebranding momentum continues.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>Hybrid events = 37% of association event budgets.</strong> Virtual: 35%. In-person only: 28%. The majority of event spend is now split or fully digital.</div>
+    <div class="news-block"><strong>Immersive, interactive event design is the 2026 standard:</strong> Real-time polls, audience response, and live Q&A are now baseline expectations.</div>
+  </div>
+
+  <!-- TAB 5: LMS -->
+  <div class="tab-panel" id="t5">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"micro-credentialing digital badges association LMS 2026"</strong></span><span class="score">score 6</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"continuing education AI personalization member learning"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"LMS AMS integration association interoperability"</strong></span><span class="score">score 4</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Micro-credentials and digital badges are how members prove their skills to employers in 2026. If your LMS doesn't issue them, members find one that does."</div>
+    <div class="angle-block">"AI-powered learning paths that adapt to each member's role, schedule, and goals: that's where continuing education is heading. Static course catalogs are already behind."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>OasisLMS:</strong> Purpose-built for associations and healthcare CE. Category leader for credentialed continuing education delivery.</div>
+    <div class="competitor-block"><strong>Cadmium:</strong> Strong in healthcare associations and highly regulated CE environments. Growing medical society adoption.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>Micro-credentialing demand accelerating:</strong> Modular, competency-based learning paths replacing traditional CE catalog structures.</div>
+    <div class="news-block"><strong>Semantic interoperability:</strong> Associations want LMS data that speaks fluently to their AMS, CRM, and career center without middleware workarounds.</div>
+  </div>
+
+  <!-- TAB 6: MIP Accounting -->
+  <div class="tab-panel" id="t6">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"FASB ASU 2025-05 CECL nonprofit policy election 2026"</strong></span><span class="score">score 7</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"federal grant accounting single audit 2026 nonprofit"</strong></span><span class="score">score 7</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"nonprofit fund accounting cloud migration revenue diversification"</strong></span><span class="score">score 5</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"FASB ASU 2025-05 requires nonprofits to confirm CECL policy elections and disclosures before 2026 year-end. That's a tight window. Organizations already running MIP Fund Accounting are not scrambling."</div>
+    <div class="angle-block">"Eighty-five percent of nonprofits are redirecting from federal grants to private and corporate sources. Their accounting system needs to track a new revenue source mix without manual workarounds."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Sage Intacct:</strong> AICPA-preferred, strong for federal grant compliance (2 CFR 200). Primary competitive threat for larger nonprofit finance teams.</div>
+    <div class="competitor-block"><strong>Blackbaud Financial Edge:</strong> Present in enterprise nonprofit accounting comparisons. Watch for consolidation moves.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>FASB ASU 2025-05 (CECL) year-end deadline approaching:</strong> Nonprofits must confirm policy elections before 2026 fiscal year-end. Software that automates this reduces audit risk.</div>
+    <div class="news-block"><strong>Revenue diversification underway:</strong> Federal funding disruption forcing nonprofits to track federal, private, corporate, and individual sources simultaneously. Fund accounting that handles all four is critical.</div>
+  </div>
+
+  <!-- TAB 7: Certification -->
+  <div class="tab-panel" id="t7">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"AI certification wave professional credentials 2026"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"credentialing software lifecycle automation exam delivery"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"ANSI accreditation certification management associations"</strong></span><span class="score">score 4</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Microsoft just launched a new wave of AI-powered certifications in May 2026. Association members are upskilling fast. A credentialing platform that cannot keep pace with that velocity loses relevance."</div>
+    <div class="angle-block">"Manual credentialing workflows break at scale. Associations with growing programs need automated eligibility, exam delivery, and renewal tracking in one system."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Credly / Certifier:</strong> Leading digital badge issuance and credential verification. Growing outside traditional association channels into corporate and education markets.</div>
+    <div class="competitor-block"><strong>Pearson VUE:</strong> Microsoft's AI certification exam delivery partner (AI-200, SC-730, SC-500). Scheduled maintenance May 16-17 signals volume preparation.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>Microsoft AI certification wave, May 2026:</strong> AI-200, SC-730, SC-500 beta and training going live. Member upskilling demand in AI fields accelerating fast.</div>
+    <div class="news-block"><strong>Full-lifecycle credentialing automation:</strong> Eligibility verification through exam delivery through issuance through renewal in one platform — replacing fragmented manual processes at scale.</div>
+  </div>
+
+  <!-- TAB 8: Career Center -->
+  <div class="tab-panel" id="t8">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"association career center non-dues revenue strategy 2026"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"job board member benefit association value proposition"</strong></span><span class="score">score 5</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"career services nonprofit workforce development platform"</strong></span><span class="score">score 4</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Members join associations for community, education, and career growth. If your career center isn't delivering on the third, your renewal rates say it first."</div>
+    <div class="angle-block">"Non-dues revenue from job boards: one of the highest-margin opportunities associations have in 2026 — and one of the most underused. YM Careers exists to change that."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Naylor:</strong> Association job boards with multi-channel posting. Positioning on revenue and reach for association publishers.</div>
+    <div class="competitor-block"><strong>Web Scribble:</strong> Career center software competitor to YM Careers in the association space. Monitor for feature announcements.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>Career-focused member benefits rising:</strong> Professionals join associations primarily to find jobs, not just to network. Career center ROI is becoming a key renewal driver.</div>
+    <div class="news-block"><strong>Non-dues revenue focus intensifying:</strong> Associations under financial pressure turning to job boards as a high-margin revenue stream. YM Careers directly addresses this need.</div>
+  </div>
+
+  <!-- TAB 9: Volunteer Mgmt -->
+  <div class="tab-panel" id="t9">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"Better Impact Galaxy Digital acquisition volunteer platform 2026"</strong></span><span class="score">score 7</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"volunteer management software consolidation 2026 market"</strong></span><span class="score">score 6</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"skill-based volunteer opportunities nonprofit engagement"</strong></span><span class="score">score 5</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Better Impact acquiring Galaxy Digital just created the largest dedicated volunteer tech platform on the market. Associations and nonprofits deserve to know what that means for their current system and future options."</div>
+    <div class="angle-block">"Volunteers in 2026 want skill-based, project-specific roles — not general help requests. Platforms that match by skill, availability, and interest retain volunteers. Platforms that don't lose them to orgs that do."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Better Impact + Galaxy Digital (Get Connected) — CRITERION C TRIGGER:</strong> Acquired March 11, 2026. Combined platform: 85,000+ organizations, 600M+ volunteer hours logged, 400+ community volunteer centers. Backed by The Brydon Group. Now the largest dedicated volunteer management platform.</div>
+    <div class="competitor-block"><strong>Golden app:</strong> #1 volunteer app on Google Play and Apple App Store. Used by 40,000+ organizations including AARP and United Way. Growing consumer-side volunteer presence.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>Better Impact acquires Galaxy Digital (March 11, 2026):</strong> Reshapes the competitive landscape. Combined entity is now the scale leader in dedicated volunteer management technology.</div>
+    <div class="news-block"><strong>Bloomerang Volunteer:</strong> Connecting donor engagement data with volunteer context — integrated supporter view becoming an expected capability across the market.</div>
+  </div>
+
+  <!-- TAB 10: Donor Mgmt -->
+  <div class="tab-panel" id="t10">
+    <div class="section-label">Rising Queries</div>
+    <div class="item-row"><span class="badge badge-surging">CRITERION D</span><span class="item-text"><strong>"federal funding cuts nonprofit donor strategy private grants 2026"</strong></span><span class="score">score 9</span></div>
+    <div class="item-row"><span class="badge badge-surging">CRITERION D</span><span class="item-text"><strong>"One Big Beautiful Bill charitable deduction change fundraising impact"</strong></span><span class="score">score 8</span></div>
+    <div class="item-row"><span class="badge badge-new">NEW</span><span class="item-text"><strong>"donor CRM AI major gift cultivation 2026"</strong></span><span class="score">score 6</span></div>
+
+    <div class="section-label">Content Angles</div>
+    <div class="angle-block">"Federal grants are drying up for 85% of nonprofits. The organizations that pivot fastest to private and major donor cultivation — with the right CRM behind them — protect their mission."</div>
+    <div class="angle-block">"The new tax law adds a $1,000 charitable deduction for standard-deduction filers. It also nets $81 billion less in charitable giving over the next decade. Donor data has never been a more critical asset."</div>
+
+    <div class="section-label">Competitor Watch</div>
+    <div class="competitor-block"><strong>Virtuous:</strong> Acquired Momentum (August 2025) — AI-first major gift officer engagement. Now the strongest AI play in the mid-to-major donor CRM market.</div>
+    <div class="competitor-block"><strong>Bloomerang:</strong> Integrated Qgiv fundraising tools (2024). AI Content Assistant live in email builder. Expanding beyond core donor database.</div>
+
+    <div class="section-label">News Hooks</div>
+    <div class="news-block"><strong>AmeriCorps $400M funding cut:</strong> 32,000+ members dismissed. Cascading impact on nonprofit workforce pipelines and community volunteer capacity. FY2026 budget proposes full shutdown.</div>
+    <div class="news-block"><strong>"One Big Beautiful Bill" charitable deduction reform:</strong> New $1K deduction for standard filers (short-term positive). Net outcome: $81B less in charitable giving over the next decade per National Council of Nonprofits. Every major donor strategy needs recalibration.</div>
+  </div>
+
+  <!-- COOLING -->
+  <details>
+    <summary>Cooling items (footnote)</summary>
+    <div class="details-inner">
+      <p style="color:#6b7280">No cooling items — this is the first run. No prior velocity averages exist to establish a cooling threshold.</p>
+    </div>
+  </details>
+
+  <!-- SOURCES -->
+  <details>
+    <summary>Sources</summary>
+    <div class="details-inner">
+      <ul style="margin-left:16px;line-height:2">
+        <li><a href="https://virtuous.org/blog/2026-nonprofit-ai-adoption-report/">2026 Nonprofit AI Adoption Report — Virtuous</a></li>
+        <li><a href="https://thenonprofittimes.com/npt_articles/nonprofits-embrace-ai-but-little-to-show-for-it-so-far/">Nonprofits Embrace AI, But Little To Show For It — NonProfit Times</a></li>
+        <li><a href="https://www.giiresearch.com/report/tbrc1978435-association-management-software-global-market.html">AMS Global Market Report 2026 — GII Research</a></li>
+        <li><a href="https://www.growthzone.com/blog/ams-trends-to-watch-in-2026">10 AMS Trends to Watch in 2026 — GrowthZone</a></li>
+        <li><a href="https://www.lutz.us/blog/fasb-guidance-for-nonprofits">FASB Guidance for Nonprofits 2026 — Lutz</a></li>
+        <li><a href="https://www.nonprofitpro.com/article/better-impact-acquires-galaxy-digital-to-expand-its-volunteer-tech/">Better Impact Acquires Galaxy Digital — NonProfit PRO</a></li>
+        <li><a href="https://virtuous.org/blog/virtuous-acquires-momentum/">Virtuous Acquires Momentum — Virtuous</a></li>
+        <li><a href="https://www.pbs.org/newshour/show/how-federal-funding-cuts-have-hit-nonprofits-and-the-communities-they-serve">How Federal Funding Cuts Hit Nonprofits — PBS NewsHour</a></li>
+        <li><a href="https://grantedai.com/blog/one-big-beautiful-bill-charitable-giving-nonprofits-2026">One Big Beautiful Bill Charitable Giving Analysis — Granted AI</a></li>
+        <li><a href="https://www.foundationlist.org/the-nonprofit-sector-at-a-crossroads-how-federal-cuts-tax-changes-and-trade-wars-are-reshaping-the-landscape/">Nonprofit Sector at a Crossroads — Foundation List</a></li>
+        <li><a href="https://www.governing.com/workforce/federal-slashes-to-americorps-threatens-a-critical-career-pipeline-for-young-adults">Federal Slashes to AmeriCorps — Governing</a></li>
+        <li><a href="https://www.councilofnonprofits.org/pressreleases/nonprofit-leaders-federal-funding-cuts-are-driving-service-disruptions-and-harming">Nonprofit Leaders: Federal Funding Cuts — National Council of Nonprofits</a></li>
+        <li><a href="https://www.pearsonvue.com/us/en/microsoft/updates.html">Microsoft Exam Updates — Pearson VUE</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- REVIEW CHECKPOINT -->
+  <div class="callout" style="background:#f8fafc;border:1px solid #e5e7eb;margin-top:16px">
+    <h2 style="font-size:14px;font-weight:700;margin-bottom:10px">Review Checkpoint</h2>
+    <p style="font-size:13px;margin-bottom:8px"><strong>Proposed mode:</strong> Mode 3 (urgent review required — banner is active).</p>
+    <p style="font-size:13px;margin-bottom:8px"><strong>What to review:</strong> URGENT-2026-05-17.md for recommended actions. Donor Management and MIP Accounting tabs are highest urgency. Volunteer Management tab for competitor positioning update.</p>
+    <p style="font-size:13px"><strong>To approve and auto-publish:</strong> Reply "approved" to rename drafts and trigger GitHub Pages sync via launchd.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Last refreshed: 04:32, Sunday May 17, 2026 &nbsp;|&nbsp; Status: DRAFT &nbsp;|&nbsp; Approve in Claude to publish to ppwong83.github.io/Momentive-Daily-Trends/
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
